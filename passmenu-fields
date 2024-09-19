@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+printf '' | xclip -selection clipboard
+
+shopt -s nullglob globstar
+
+prefix=${PASSWORD_STORE_DIR-~/.password-store}
+password_files=( "$prefix"/**/*.gpg )
+password_files=( "${password_files[@]#"$prefix"/}" )
+password_files=( "${password_files[@]%.gpg}" )
+
+password=$(printf '%s\n' "${password_files[@]}" | dmenu -i "$@")
+
+[[ -n $password ]] || exit
+
+fileContents=$(pass "$password")
+
+selected=$(echo -e "username\npassword\notp" | dmenu)
+
+case "$selected" in
+    username)
+        echo "$fileContents" | sed -n '2p' | cut -d '=' -f 2 | xclip -selection clipboard
+    ;;
+    password)
+        echo "$fileContents" | sed -n '1p' | xclip -selection clipboard
+    ;;
+    otp)
+        pass otp -c "$password"
+    ;;
+esac
