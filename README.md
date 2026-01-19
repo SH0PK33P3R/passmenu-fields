@@ -10,6 +10,7 @@ It displays your pass files in dmenu, including a click-through menu for sub-fie
 - xclip
 - dmenu
 - pass
+- clipmenu (will remove this dependency later)
 
 ## Setup
 

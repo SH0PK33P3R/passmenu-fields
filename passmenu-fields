@@ -22,7 +22,9 @@ case "$selected" in
         echo "$fileContents" | sed -n '2p' | cut -d '=' -f 2 | xclip -selection clipboard
     ;;
     password)
+	clipctl disable
         echo "$fileContents" | sed -n '1p' | xclip -selection clipboard
+	clipctl enable
     ;;
     otp)
         pass otp -c "$password"
