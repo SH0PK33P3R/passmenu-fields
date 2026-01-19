@@ -26,3 +26,5 @@ otpauth://totp/...
 
 - [ ] Allow for more flexible file structure
 - [ ] Make fields dynamic based on fields available in gpg file
+- [ ] Auto clear clipboard after x amount of seconds
+- [ ] Disable clipmenu clipctl while copying password
